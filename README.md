@@ -1,1 +1,2 @@
-# Konyvtar
+# Milichovszky Sándor András
+# Péti Dominik
