@@ -6,7 +6,12 @@ public class Konyvtar {
     private AbstractTermek[] termekek;
     
     public Konyvtar() {
-        //this.termekek = {};
+        this.termekek = new AbstractTermek[]{new CD("Kiadó 1", "Cím 1"),
+                            new Konyv("Szerző 1", false, "Cím 2"),
+                            new Konyv("Szerző 2", true, "Cím 3"),
+                            new CD("Kiadó 1", "Cím 4"),
+                            new CD("Kiadó 1", "Cím 5"),
+                            new Konyv("Szerző 1", true, "Cím 6")};
         
         this.termekek();
         this.kolcsonozhetok();
@@ -16,9 +21,9 @@ public class Konyvtar {
         Optional<AbstractTermek> kolcsonzott = this.felvesz(termekId);
         
         if (kolcsonzott.isEmpty()) {
-            System.out.println("Nem található ilyen id!");
+            System.out.println("Nem kölcsönözhető ez a könyv!");
         } else {
-            System.out.printf("A kikölcsönzött könyv: %s\n", kolcsonzott.get().toString());
+            System.out.printf("---------A kikölcsönzött könyv: \n%s\n", kolcsonzott.get().toString());
         }
     }
     
@@ -32,7 +37,7 @@ public class Konyvtar {
     public void kolcsonozhetok() {
         System.out.println("---------Kölcsönözhető termékek:");
         for (AbstractTermek termek : this.termekek) {
-            if (termek.getClass().isInstance(AbstractTermek.class)) {
+            if (termek instanceof Kolcsonozheto) {
                 System.out.println(termek);
             }
         }
@@ -46,7 +51,7 @@ public class Konyvtar {
         }
         if (i < this.termekek.length) {
             termek = this.termekek[i];
-            if (termek.getClass().isInstance(Kolcsonozheto.class)) {
+            if (termek instanceof Kolcsonozheto) {
                 return Optional.of(termek);
             }
         }
